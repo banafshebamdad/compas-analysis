@@ -42,7 +42,7 @@ We investigated whether COMPAS disproportionately classifies certain demographic
 ## 2. Bias mitigation via reweighing (pre-processing)
 
 ### Method
-We applied the **Reweighing algorithm** from [AIF360](https://aif360.readthedocs.io/) toolkit to address racial bias by adjusting instance weights during training.
+We applied the Reweighing algorithm from [AIF360](https://aif360.readthedocs.io/) toolkit to address racial bias by adjusting instance weights during training. The analysis was conducted on our cleaned and preprocessed COMPAS dataset, in which categorical features like race and sex were transformed into a suitable format for fairness evaluation.
 
 - Trained an XGBoost model before and after mitigation.
 - Evaluated using:
