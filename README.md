@@ -1,6 +1,8 @@
 > **This repository is a fork of the original ProPublica COMPAS analysis repository.**  
-> The original project and dataset are available here:  
-> [https://github.com/propublica/compas-analysis](https://github.com/propublica/compas-analysis)
+> The original project and dataset are available here: [https://github.com/propublica/compas-analysis](https://github.com/propublica/compas-analysis)
+
+> Source code for **Group 3**'s project in the Una Europa Challenge: Data Science and AI for Social Welfare is available here: https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid
+
 
 # Bias Analysis Report on the COMPAS Dataset - Group 3
 
