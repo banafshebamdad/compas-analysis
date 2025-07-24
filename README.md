@@ -1,25 +1,3 @@
-                  Low  High
-                 +---------+
-Didn't Reoffend  |____|____|
-Reoffended       |    |    |
-                 +---------+
-
-
-This repository contains a Jupyter notebook and data for the ProPublica story "Machine Bias."
-
-Story:
-https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing/
-
-Methodology:
-https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm/
-
-Notebook (you'll probably want to follow along in the methodology):
-https://github.com/propublica/compas-analysis/blob/master/Compas%20Analysis.ipynb
-
-Main Dataset:
-compas.db - a sqlite3 database containing criminal history, jail and prison time, demographics and COMPAS risk scores for defendants from Broward County.
-
-Other files as needed for the analysis.
 
 # Bias Analysis Report on the COMPAS Dataset - Group 3
 
@@ -45,15 +23,15 @@ This report investigates potential bias in the COMPAS recidivism risk assessment
 
 ### Decile Score Distribution by Race and Sex
 This plot shows that African-American individuals, especially males, tend to receive higher scores:
-![Decile Score by Race and Sex](https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid/analyze_compas_bias_plot/decile_score_by_race_and_sex.png)
+![Decile Score by Race and Sex](https://github.com/banafshebamdad/compas-analysis/raw/master/DSAL_Madrid/analyze_compas_bias_plot/decile_score_by_race_and_sex.png)
 
 ### False Positive Rate by Race and Sex
 Certain groups are disproportionately predicted to reoffend despite not doing so.
-![False Positive Rate](https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid/analyze_compas_bias_plot/false_positive_rate_by_race_sex.png)
+![False Positive Rate](https://github.com/banafshebamdad/compas-analysis/raw/master/DSAL_Madrid/analyze_compas_bias_plot/false_positive_rate_by_race_sex.png)
 
 ### False Negative Rate by Race and Sex
 Some groups receive lower risk scores even when they did reoffend:
-![False Negative Rate](https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid/analyze_compas_bias_plot/false_negative_rate_by_race_sex.png)
+![False Negative Rate](https://github.com/banafshebamdad/compas-analysis/raw/master/DSAL_Madrid/analyze_compas_bias_plot/false_negative_rate_by_race_sex.png)
 
 ## Conclusion
 
