@@ -52,11 +52,13 @@ We applied the **Reweighing algorithm** from [AIF360](https://aif360.readthedocs
 
 ### Results
 
-| Metric                       | Before reweighing | After reweighing |
+| Metric                       | Before reweighing (XGBoost) | After reweighing (XGBoost) |
 | ---------------------------- | ----------------- | ---------------- |
-| Accuracy                 | 0.662             | 0.660            |
-| Statistical parity diff. | -0.188 (biased)   | -0.022 (fairer)  |
-| Disparate impact         | 0.741 (biased)    | 0.965 (near 1.0) |
+| Accuracy                 | 0.683             | 0.672            |
+| Statistical parity diff. | -0.261 (biased)   | -0.068 (fairer)  |
+| Disparate impact         | 0.652 (biased)    | 0.892 (near 1.0) |
+| Equal opportunity diff.  | -0.198            | -0.010           |
+| Average odds diff.       | -0.220            | -0.026           |
 
 ### Interpretation
 * A statistical parity difference near 0 and disparate impact near 1.0 suggest significant fairness improvement after applying reweighing.
