@@ -31,34 +31,27 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
-# Make output folder
 os.makedirs("analyze_compas_bias_plot", exist_ok=True)
 
-# Load dataset
 df = pd.read_csv("compas-scores-two-years.csv")
 
-# Drop unnecessary columns
 columns_to_drop = ['id', 'name', 'first', 'last', 'compas_screening_date', 'dob',
                    'c_case_number', 'c_offense_date', 'c_arrest_date', 'r_case_number',
                    'r_offense_date', 'vr_case_number', 'vr_offense_date',
                    'start', 'end', 'event']
 df.drop(columns=columns_to_drop, inplace=True, errors='ignore')
 
-# Drop rows with missing key features
 df = df.dropna(subset=['race', 'sex', 'age', 'priors_count', 'decile_score', 'two_year_recid'])
 
-# Filter to valid score_text categories
 df = df[df['score_text'].isin(['Low', 'Medium', 'High'])]
 
-# --- Descriptive statistics ---
-print("\n--- Recidivism Rates by Race ---")
+print("\n--- Recidivism rates by race ---")
 print(df.groupby('race')['two_year_recid'].mean())
 
-print("\n--- Average Decile Score by Race ---")
+print("\n--- Average decile score by race ---")
 print(df.groupby('race')['decile_score'].mean())
 
-# --- False Positive/Negative Rates by Race ---
-print("\n--- False Positive and Negative Rates by Race ---")
+print("\n--- False positive and negative rates by race ---")
 for race in df['race'].unique():
     subset = df[df['race'] == race]
     high_risk = subset['score_text'].isin(['High', 'Medium'])
@@ -69,11 +62,10 @@ for race in df['race'].unique():
     total = len(subset)
 
     print(f"\nRace: {race}")
-    print(f"False Positive Rate: {fp / total:.2f}")
-    print(f"False Negative Rate: {fn / total:.2f}")
+    print(f"False positive rate: {fp / total:.2f}")
+    print(f"False negative rate: {fn / total:.2f}")
 
-# --- False Positive/Negative Rates by Race + Sex ---
-print("\n--- False Positive and Negative Rates by Race + Sex ---")
+print("\n--- False positive and negative rates by Race + Sex ---")
 grouped = df.groupby(['race', 'sex'])
 for (race, sex), subset in grouped:
     high_risk = subset['score_text'].isin(['High', 'Medium'])
@@ -87,10 +79,9 @@ for (race, sex), subset in grouped:
     print(f"False Positive Rate: {fp / total:.2f}")
     print(f"False Negative Rate: {fn / total:.2f}")
 
-# --- Visualizations ---
 plt.figure(figsize=(10, 6))
 sns.boxplot(data=df, x='race', y='decile_score')
-plt.title("Decile Score Distribution by Race")
+plt.title("Decile score distribution by race")
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig("analyze_compas_bias_plot/decile_score_by_race.png")
@@ -111,11 +102,10 @@ plt.tight_layout()
 plt.savefig("analyze_compas_bias_plot/decile_score_by_race_and_sex.png")
 plt.close()
 
-# --- Logistic Regression Model ---
+# Logistic Regression Model
 features = ['age', 'sex', 'race', 'priors_count', 'juv_fel_count', 'juv_misd_count', 'juv_other_count', 'c_charge_degree']
 df_model = df[features + ['two_year_recid']].copy()
 
-# Encode categorical variables
 df_model['sex'] = df_model['sex'].astype('category').cat.codes
 df_model['race'] = df_model['race'].astype('category').cat.codes
 df_model['c_charge_degree'] = df_model['c_charge_degree'].astype('category').cat.codes
@@ -129,9 +119,9 @@ model = LogisticRegression(max_iter=1000)
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
-print("\n--- Classification Report ---")
+print("\n--- Classification report ---")
 print(classification_report(y_test, y_pred))
 
-print("\n--- Feature Importances (Logistic Coefficients) ---")
+print("\n--- Feature importances (Logistic coefficients) ---")
 for name, coef in zip(X.columns, model.coef_[0]):
     print(f"{name}: {coef:.4f}")
