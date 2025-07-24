@@ -66,13 +66,5 @@ We applied the Reweighing algorithm from [AIF360](https://aif360.readthedocs.io/
 * A statistical parity difference near 0 and disparate impact near 1.0 suggest significant fairness improvement after applying reweighing.
 * The accuracy is nearly unchanged, indicating bias was reduced without sacrificing performance.
 
-### Visualizations
-
-- **Statistical Parity Difference**  
-  ![Stat Parity](DSAL_Madrid/analyze_compas_bias_plot/statistical_parity_difference_before_after.png)
-
-- **Disparate Impact**  
-  ![Disparate Impact](DSAL_Madrid/disparate_impact_before_after.png)
-
 ### Conclusion
 The reweighing algorithm successfully **reduced racial bias** in the model’s predictions while maintaining predictive accuracy.
