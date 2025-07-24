@@ -48,6 +48,8 @@ We applied the Reweighing algorithm from [AIF360](https://aif360.readthedocs.io/
 - Evaluated using:
   - **Statistical parity difference**: Difference in the rate of favorable outcomes between unprivileged and privileged groups. Closer to 0 means fairer treatment.
   - **Disparate impact**: Ratio of favorable outcome rates between groups. A value close to 1.0 indicates fairness.
+  - **Equal opportunity difference**: Difference in true positive rates between unprivileged and privileged groups. Closer to 0 means equal opportunity is preserved.
+  - **Average odds difference**: Average of differences in both true positive and false positive rates across groups. A value near 0 indicates fairer decision boundaries.
   - **Accuracy**: The proportion of correct predictions made by the model.
 
 ### Results
