@@ -1,7 +1,7 @@
 
 # Bias Analysis Report on the COMPAS Dataset - Group 3
 
-## Executive Summary
+## Summary
 This report investigates potential bias in the COMPAS recidivism risk assessment algorithm using the publicly available dataset from ProPublica. The focus is on whether the model disproportionately classifies certain demographic groups, especially by race and gender, as high risk, even when their actual recidivism behavior does not justify such classifications. Our findings reveal patterns that strongly suggest the presence of racial and gender bias in the COMPAS system.
 
 ## Key Findings
