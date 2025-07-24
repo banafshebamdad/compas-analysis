@@ -1,44 +1,74 @@
+# Bias Analysis on the COMPAS Dataset - Group 3 (Una Europa Challenge)
+
 > **This repository is a fork of the original ProPublica COMPAS analysis repository.**  
 > The original project and dataset are available [here](https://github.com/propublica/compas-analysis).
 
-> Source code for **Group 3**'s project in the Una Europa Challenge: Data Science and AI for Social Welfare is available [here](https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid).
+> Source code for **Group 3**'s project in the Una Europa Challenge: *Data Science and AI for Social Welfare* is available [here](https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid).
 
+## Project overview
 
-# Bias Analysis Report on the COMPAS Dataset - Group 3
+This repository contains Group 3’s analysis of the COMPAS recidivism risk scoring algorithm, with a focus on identifying and mitigating algorithmic bias, particularly racial and gender bias. The project consists of:
 
-## Summary
-This report investigates potential bias in the COMPAS recidivism risk assessment algorithm using the publicly available dataset from ProPublica. The focus is on whether the model disproportionately classifies certain demographic groups, especially by race and gender, as high risk, even when their actual recidivism behavior does not justify such classifications. Our findings reveal patterns that strongly suggest the presence of racial and gender bias in the COMPAS system.
+1. **Exploratory bias analysis**: measuring disparities in risk scores, false positives, and false negatives.
+2. **Bias mitigation via reweighing**: applying the AIF360 fairness algorithm to reduce racial bias in predictions.
 
-## Key Findings
+## 1. Exploratory bias analysis
 
-### 1. Disparities in Risk Scores
-- African-American individuals tend to receive higher decile scores compared to other groups.
-- In contrast, Caucasian individuals tend to receive lower scores, even when their actual recidivism rates are similar.
+### Summary
+We investigated whether COMPAS disproportionately classifies certain demographic groups (e.g. African-Americans) as high risk. The analysis shows evidence of **racial and gender bias**, even when individuals have similar recidivism behavior.
 
-### 2. False Positive Rates (FPR)
-- African-American females had a false positive rate of 25.2%, meaning over a quarter were wrongly labeled high risk while they did not reoffend.
-- This contrasts with Caucasian females, who had an FPR of only 19.6%.
-- Such disparities suggest the algorithm may overestimate risk for African-Americans.
+### Key Findings
 
-### 3. False Negative Rates (FNR)
-- For Caucasian females, the false negative rate was 15.2%, while for African-American males, it was 15.0%, indicating potentially underestimating risk for certain groups.
-- Some minority groups, such as Asian females, had very small sample sizes, but still experienced an FNR of 50%, highlighting instability.
+#### Disparities in Risk Scores
+- African-American individuals tend to receive **higher** decile scores than Caucasians.
+- Similar recidivism rates do **not** explain these differences.
 
-## Visual Evidence
+#### False Positive & False Negative Rates
+- **FPR**: African-American females – 25.2%, vs. Caucasian females – 19.6%.
+- **FNR**: Caucasian females – 15.2%, African-American males – 15.0%.
+- Small groups like Asian females showed instability (FNR = 50%).
 
-### Decile Score Distribution by Race and Sex
-This plot shows that African-American individuals, especially males, tend to receive higher scores:
-![Decile Score by Race and Sex](https://github.com/banafshebamdad/compas-analysis/raw/master/DSAL_Madrid/analyze_compas_bias_plot/decile_score_by_race_and_sex.png)
+### Visual Evidence
 
-### False Positive Rate by Race and Sex
-Certain groups are disproportionately predicted to reoffend despite not doing so.
-![False Positive Rate](https://github.com/banafshebamdad/compas-analysis/raw/master/DSAL_Madrid/analyze_compas_bias_plot/false_positive_rate_by_race_sex.png)
+- **Decile score distribution by race and sex**  
+  ![Decile Score](DSAL_Madrid/analyze_compas_bias_plot/decile_score_by_race_and_sex.png)
 
-### False Negative Rate by Race and Sex
-Some groups receive lower risk scores even when they did reoffend:
-![False Negative Rate](https://github.com/banafshebamdad/compas-analysis/raw/master/DSAL_Madrid/analyze_compas_bias_plot/false_negative_rate_by_race_sex.png)
+- **False positive rate by race and sex**  
+  ![FPR](DSAL_Madrid/analyze_compas_bias_plot/false_positive_rate_by_race_sex.png)
 
-## Conclusion
+- **False negative rate by race and sex**  
+  ![FNR](DSAL_Madrid/analyze_compas_bias_plot/false_negative_rate_by_race_sex.png)
 
-The analysis demonstrates that the COMPAS algorithm exhibits disparate impact across racial and gender lines. This violates principles of fairness in algorithmic decision-making. While COMPAS may not explicitly use race as an input, its use of correlated variables appears to produce racially biased outcomes. These findings underscore the need for greater transparency, accountability, and fairness auditing in criminal justice algorithms.
+## 2. Bias mitigation via reweighing (pre-processing)
 
+### Method
+We applied the **Reweighing algorithm** from [AIF360](https://aif360.readthedocs.io/) toolkit to address racial bias by adjusting instance weights during training.
+
+- Trained an XGBoost model before and after mitigation.
+- Evaluated using:
+  - **Statistical parity difference**: Difference in the rate of favorable outcomes between unprivileged and privileged groups. Closer to 0 means fairer treatment.
+  - **Disparate impact**: Ratio of favorable outcome rates between groups. A value close to 1.0 indicates fairness.
+  - **Accuracy**: The proportion of correct predictions made by the model.
+
+### Results
+
+| Metric                       | Before reweighing | After reweighing |
+| ---------------------------- | ----------------- | ---------------- |
+| Accuracy                 | 0.662             | 0.660            |
+| Statistical parity diff. | -0.188 (biased)   | -0.022 (fairer)  |
+| Disparate impact         | 0.741 (biased)    | 0.965 (near 1.0) |
+
+### Interpretation
+* A statistical parity difference near 0 and disparate impact near 1.0 suggest significant fairness improvement after applying reweighing.
+* The accuracy is nearly unchanged, indicating bias was reduced without sacrificing performance.
+
+### Visualizations
+
+- **Statistical Parity Difference**  
+  ![Stat Parity](DSAL_Madrid/analyze_compas_bias_plot/statistical_parity_difference_before_after.png)
+
+- **Disparate Impact**  
+  ![Disparate Impact](DSAL_Madrid/disparate_impact_before_after.png)
+
+### Conclusion
+The reweighing algorithm successfully **reduced racial bias** in the model’s predictions while maintaining predictive accuracy.
