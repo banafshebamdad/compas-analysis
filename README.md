@@ -4,6 +4,8 @@
 > The original project and dataset are available [here](https://github.com/propublica/compas-analysis).
 
 > Source code for **Group 3**'s project in the Una Europa Challenge: *Data Science and AI for Social Welfare* is available [here](https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid).
+> See also the [Additional Resources](#additional-resources) section for the Colab notebook and Excel summary.
+
 
 ## Project overview
 
