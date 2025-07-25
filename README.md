@@ -68,3 +68,9 @@ We applied the Reweighing algorithm from [AIF360](https://aif360.readthedocs.io/
 
 ### Conclusion
 The reweighing algorithm successfully **reduced racial bias** in the model’s predictions while maintaining predictive accuracy.
+
+## Additional Resources
+
+- **Recidivism analysis Excel file**: [Recidivism_Analysis.xlsx](DSAL_Madrid/Recidivism_Analysis.xlsx)
+- **Interactive Colab notebook**: [COMPAS analysis on Colab](https://colab.research.google.com/drive/1CsTRwBY57-8L7MOchOEg80s9Y2-TKCxM#scrollTo=AEZD_NJtjpl2)
+
