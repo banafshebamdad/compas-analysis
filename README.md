@@ -3,9 +3,17 @@
 > **This repository is a fork of the original ProPublica COMPAS analysis repository.**  
 > The original project and dataset are available [here](https://github.com/propublica/compas-analysis).
 
-> Source code for **Group 3**'s project in the Una Europa Challenge: *Data Science and AI for Social Welfare* is available [here](https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid).
-> 
-> See also the [Additional Resources](#additional-resources) section for the Colab notebook and Excel summary.
+## Explore the project
+
+- **Source code (Group 3 - Una Europa Challenge: Data Science and AI for Social Welfare)**:  
+  [View implementation on GitHub](https://github.com/banafshebamdad/compas-analysis/tree/master/DSAL_Madrid)
+
+- **Recidivism analysis Excel file**:  
+  [Download Recidivism_Analysis.xlsx](DSAL_Madrid/Recidivism_Analysis.xlsx)
+
+- **Interactive Colab notebook**:  
+  [Open in Google Colab](https://colab.research.google.com/drive/1CsTRwBY57-8L7MOchOEg80s9Y2-TKCxM#scrollTo=AEZD_NJtjpl2)
+
 
 
 ## Project overview
